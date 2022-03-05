@@ -145,15 +145,20 @@ export default {
     getTableData () {
       // 111111
       getBanner({ name: 'tabledata' }).then((res) => {
-        // console.log(res)
-        this.tableData = res
+        for (const i in res.data) {
+          delete res.data[i].id
+        }
+        this.tableData = res.data
         // console.log(this.tableData)
       })
       // 222222
       getBanner({ name: 'orderdata' }).then((res) => {
         // console.log(res)
         // 折线图的展示
-        const order = res
+        for (const i in res.data) {
+          delete res.data[i].id
+        }
+        const order = res.data
         const keyArray = Object.keys(order[0])
         // 传给组件的值
         // this.echartData.order.xData = order.date
@@ -168,8 +173,11 @@ export default {
       getBanner({ name: 'date' }).then((res) => {
         // 传给组件的值
         // console.log(res)
+        for (const i in res.data) {
+          delete res.data[i].id
+        }
         const date = []
-        res.forEach((data, i) => {
+        res.data.forEach((data, i) => {
           // console.log(data.time)
           date[i] = data.time
         })
@@ -178,23 +186,29 @@ export default {
       // 33333
       getBanner({ name: 'userdata' }).then((res) => {
         // 用户图
-        this.echartData.user.xData = res.map((item) => item.data)
+        for (const i in res.data) {
+          delete res.data[i].id
+        }
+        this.echartData.user.xData = res.data.map((item) => item.data)
         this.echartData.user.series.push({
           name: '新增用户',
-          data: res.map((item) => item.new),
+          data: res.data.map((item) => item.new),
           type: 'bar'
         })
         this.echartData.user.series.push({
           name: '活跃用户',
-          data: res.map((item) => item.active),
+          data: res.data.map((item) => item.active),
           type: 'bar'
         })
       })
       // 444444
       getBanner({ name: 'videodata' }).then((res) => {
         // console.log(res.data.data)
+        for (const i in res.data) {
+          delete res.data[i].id
+        }
         this.echartData.video.series.push({
-          data: res,
+          data: res.data,
           type: 'pie'
         })
       })

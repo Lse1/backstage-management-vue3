@@ -15,7 +15,7 @@
 export default {
   data () {
     return {
-      data: '价格'
+      data: ''
     }
   },
   props: {
@@ -26,6 +26,9 @@ export default {
     DataChange () {
       this.$emit('DataChange', this.data)
     }
+  },
+  beforeUpdate () {
+    this.data = this.value
   }
 }
 </script>

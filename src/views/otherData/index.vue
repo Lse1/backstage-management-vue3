@@ -96,6 +96,7 @@ export default {
       })
     getCommodity({ name: '价格', num: 0 })
       .then((res) => {
+        console.log(res)
         this.sum = parseInt(res.count[0].counts)
         this.tableData = res.data
         const hc = JSON.parse(JSON.stringify(res.data))

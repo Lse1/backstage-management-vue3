@@ -14,10 +14,20 @@
         <template #default="scope">
           <el-button @click="handleClick(scope.row)"
                      type="text"
-                     size="small">修改</el-button>
+                     size="small">
+            <el-icon color="#409EFF"
+                     size="25px">
+              <edit />
+            </el-icon>
+          </el-button>
           <el-button @click="deleteClick(scope.row)"
                      type="text"
-                     size="small">删除</el-button>
+                     size="small">
+            <el-icon color="#F56C6C"
+                     size="25px">
+              <delete-filled />
+            </el-icon>
+          </el-button>
         </template>
       </el-table-column>
     </el-table>

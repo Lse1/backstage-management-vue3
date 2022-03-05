@@ -5,6 +5,7 @@
 declare module 'vue' {
   export interface GlobalComponents {
     AddData: typeof import('./src/components/data/AddData.vue')['default']
+    Body: typeof import('./src/components/data/Body.vue')['default']
     ECharts: typeof import('./src/components/ECharts.vue')['default']
     ElAside: typeof import('element-plus/es')['ElAside']
     ElBreadcrumb: typeof import('element-plus/es')['ElBreadcrumb']
@@ -36,6 +37,7 @@ declare module 'vue' {
     Menu: typeof import('./src/components/Menu.vue')['default']
     Searchs: typeof import('./src/components/data/Searchs.vue')['default']
     TableSelect: typeof import('./src/components/data/TableSelect.vue')['default']
+    UpdateDataPopup: typeof import('./src/components/data/UpdateDataPopup.vue')['default']
   }
 }
 
