@@ -37,7 +37,6 @@ declare module 'vue' {
     Menu: typeof import('./src/components/Menu.vue')['default']
     Searchs: typeof import('./src/components/data/Searchs.vue')['default']
     TableSelect: typeof import('./src/components/data/TableSelect.vue')['default']
-    UpdateDataPopup: typeof import('./src/components/data/UpdateDataPopup.vue')['default']
   }
 }
 

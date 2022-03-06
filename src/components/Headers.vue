@@ -66,6 +66,11 @@ export default {
     const shrink = () => {
       store.commit('collapseMenu')
     }
+    const logout = () => {
+      localStorage.removeItem('token')
+      // history.go(0)
+      router.push({ name: 'register' })
+    }
     watch(
       route,
       () => {
@@ -76,7 +81,8 @@ export default {
     return {
       click,
       breadcrumbList,
-      shrink
+      shrink,
+      logout
     }
   }
 }

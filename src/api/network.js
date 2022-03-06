@@ -1,5 +1,5 @@
 import axios from 'axios'
-// import router from '../router'
+import router from '../router'
 // import { Message } from 'element-ui'
 // import Vue from 'vue'
 
@@ -31,7 +31,7 @@ axios.interceptors.response.use(function (response) {
   // 对响应错误做点什么
   // console.log('1234')
   console.log(error)
-  // router.push({ name: 'register' })
+  router.push({ name: 'register' })
   // Message.error('请登录')
   return Promise.reject(error)
 })

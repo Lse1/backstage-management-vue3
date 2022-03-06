@@ -6,7 +6,8 @@
               @upTableData="upTableData"></Search>
       <AddDaata :tableLabel="tableLabel"
                 :value="value"
-                @updata="updata"></AddDaata>
+                @updata="updata"
+                :title="'添加用户'"></AddDaata>
     </div>
 
     <Body :tableLabel="tableLabel"
@@ -22,7 +23,7 @@
 </template>
 
 <script>
-import { getCommodity, getTableName } from '../../api/index'
+import { getBanner } from '../../api/index'
 import AddDaata from '../../components/data/AddData.vue'
 import Search from '../../components/data/Searchs.vue'
 import Body from '../../components/data/Body.vue'
@@ -40,6 +41,7 @@ export default {
       tableLabel: [],
       sum: 100,
       num: 0,
+      cities: ['videodata', 'date', 'userdata', 'tabledata', 'orderdata'],
       value: '',
       thisname: ''
     }
@@ -51,14 +53,16 @@ export default {
       this.num = num
     },
     getdata (num) {
-      getCommodity({ name: this.value, num: num })
+      getBanner({ name: this.value, num: num })
         .then((res) => {
           // console.log(res)
           this.sum = parseInt(res.count[0].counts)
           this.tableData = res.data
           const hc = JSON.parse(JSON.stringify(res.data))
           const props = Object.keys(hc.reduce((o, c) => Object.assign(o, c)))
+          console.log(hc)
           props.splice(props.indexOf('id'), 1)
+
           this.tableLabel = props
         }).catch((err) => {
           console.log(err)
@@ -77,25 +81,16 @@ export default {
     }
   },
   created () {
-    getTableName()
+    getBanner({ name: 'user', num: 0 })
       .then((res) => {
-        // console.log(res)
-        for (const n in res) {
-          // console.log(res[n].thisname)
-          this.cities[n] = res[n].thisname
-        }
-        this.value = this.cities[0]
-      }).catch((err) => {
-        console.log(err)
-      })
-    getCommodity({ name: '价格', num: 0 })
-      .then((res) => {
+        console.log(res)
         this.sum = parseInt(res.count[0].counts)
         this.tableData = res.data
         const hc = JSON.parse(JSON.stringify(res.data))
         const props = Object.keys(hc.reduce((o, c) => Object.assign(o, c)))
         props.splice(props.indexOf('id'), 1)
         this.tableLabel = props
+        this.value = 'videodata'
       }).catch((err) => {
         console.log(err)
       })

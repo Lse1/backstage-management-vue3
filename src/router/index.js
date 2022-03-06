@@ -33,12 +33,23 @@ const routes = [
         component: () => import('../views/user/index.vue')
       }
     ]
+  },
+  {
+    path: '/register',
+    name: 'register',
+    component: () => import('../views/Register.vue')
   }
 ]
 
 const router = createRouter({
   history: createWebHistory(process.env.BASE_URL),
   routes
+})
+
+router.beforeEach((to, from, next) => {
+  const token = localStorage.getItem('token')
+  if (to.name !== 'register' && !token) next({ name: 'register' })
+  else next()
 })
 
 export default router

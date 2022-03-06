@@ -41,6 +41,7 @@ export default {
 .searchBody {
   .search {
     width: 180px;
+    margin-right: 10px;
   }
 }
 </style>

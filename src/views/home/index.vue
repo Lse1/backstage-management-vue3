@@ -14,7 +14,6 @@
         </div>
         <div class="login-info">
           <p>上次登录时间:<span>2022-1-8</span></p>
-          <p>上次登录地点:<span>中国</span></p>
         </div>
       </el-card>
       <el-card style="height: 470px; margin-top: 10px">

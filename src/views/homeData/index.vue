@@ -10,7 +10,8 @@
               @upTableData="upTableData"></Search>
       <AddDaata :tableLabel="tableLabel"
                 :value="value"
-                @updata="updata"></AddDaata>
+                @updata="updata"
+                :title="'添加数据'"></AddDaata>
     </div>
 
     <Body :tableLabel="tableLabel"

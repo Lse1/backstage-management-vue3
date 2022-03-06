@@ -2,8 +2,8 @@
   <i class="addData">
     <el-button type="primary"
                @click="datasheet"
-               class="button">添加数据</el-button>
-    <el-dialog title="添加数据"
+               class="button">{{title}}</el-button>
+    <el-dialog :title="title"
                v-model="dialogFormVisible">
       <el-form :model="form">
         <el-form-item v-for="(val,key) in tableLabel"
@@ -38,7 +38,8 @@ export default {
   },
   props: {
     tableLabel: { type: [], default: [] },
-    value: { type: String, default: '' }
+    value: { type: String, default: '' },
+    title: { type: String, default: '' }
   },
   methods: {
     adddata () {
