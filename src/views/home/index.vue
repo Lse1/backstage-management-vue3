@@ -8,12 +8,12 @@
           <img :src="userImg"
                alt="">
           <div class="userInfo">
-            <p class="name">Admin</p>
-            <p class="access">超级管理员</p>
+            <p class="name">{{user}}</p>
+            <p class="access">{{identity}}</p>
           </div>
         </div>
         <div class="login-info">
-          <p>上次登录时间:<span>2022-1-8</span></p>
+          <p>上次登录时间:<span>{{lastTime}}</span></p>
         </div>
       </el-card>
       <el-card style="height: 470px; margin-top: 10px">
@@ -68,10 +68,7 @@
 </template>
 
 <script>
-// import { getHome } from '../../api/data'
-// import { getBanner, getUserdata, getVideodata, getOrderdata, getDate } from '../../api/index'
 import { getBanner } from '@/api/index'
-// import * as echarts from 'echarts'
 import Echart from '@/components/ECharts.vue'
 export default {
   components: {
@@ -81,6 +78,9 @@ export default {
     return {
       userImg: require('../../assets/images/user.png'),
       tableData: [],
+      user: 'admin',
+      identity: '',
+      lastTime: '',
       tableLabel: {
         name: '商品',
         todayBuy: '今日购买',
@@ -211,6 +211,9 @@ export default {
           type: 'pie'
         })
       })
+      this.user = localStorage.getItem('user')
+      this.identity = localStorage.getItem('identity')
+      this.lastTime = localStorage.getItem('lastTime')
     }
   },
   mounted () {

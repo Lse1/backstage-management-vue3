@@ -56,6 +56,12 @@ export default {
           icon: 'List',
           children: [
             {
+              path: '/shopData',
+              name: 'shopData',
+              label: '商品数据',
+              icon: 'List'
+            },
+            {
               path: '/homeData',
               name: 'homeData',
               label: '首页数据',

@@ -9,7 +9,7 @@
 </template>
 
 <script>
-import { getCommoditySearch } from '../../api/index'
+import { getCommoditySearch, getUserSearch } from '../../api/index'
 
 export default {
   data () {
@@ -24,13 +24,22 @@ export default {
   methods: {
     searchs () {
       if (this.input !== '') {
-        const field = this.tableLabel.join(',')
-        getCommoditySearch({ name: this.value, data: this.input, field: field })
-          .then((res) => {
-            this.$emit('upTableData', res)
-          }).catch((err) => {
-            console.log(err)
-          })
+        if (this.$route.name === 'otherData') {
+          const field = this.tableLabel.join(',')
+          getCommoditySearch({ name: this.value, data: this.input, field: field })
+            .then((res) => {
+              this.$emit('upTableData', res)
+            }).catch((err) => {
+              console.log(err)
+            })
+        } else if (this.$route.name === 'user') {
+          getUserSearch({ data: this.input })
+            .then((res) => {
+              this.$emit('upTableData', res)
+            }).catch((err) => {
+              console.log(err)
+            })
+        }
       }
     }
   }

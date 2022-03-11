@@ -4,10 +4,10 @@
       <Search :tableLabel="tableLabel"
               :value="value"
               @upTableData="upTableData"></Search>
-      <AddDaata :tableLabel="tableLabel"
-                :value="value"
-                @updata="updata"
-                :title="'添加用户'"></AddDaata>
+      <AddUser :tableLabel="tableLabel"
+               :value="value"
+               @updata="updata"
+               :title="'添加用户'"></AddUser>
     </div>
 
     <Body :tableLabel="tableLabel"
@@ -23,15 +23,15 @@
 </template>
 
 <script>
-import { getBanner } from '../../api/index'
-import AddDaata from '../../components/data/AddData.vue'
+import { getUser } from '../../api/index'
+import AddUser from '../../components/data/AddUser.vue'
 import Search from '../../components/data/Searchs.vue'
 import Body from '../../components/data/Body.vue'
 
 export default {
   name: 'Mall',
   components: {
-    AddDaata,
+    AddUser,
     Search,
     Body
   },
@@ -53,7 +53,7 @@ export default {
       this.num = num
     },
     getdata (num) {
-      getBanner({ name: this.value, num: num })
+      getUser({ num: num })
         .then((res) => {
           // console.log(res)
           this.sum = parseInt(res.count[0].counts)
@@ -62,7 +62,6 @@ export default {
           const props = Object.keys(hc.reduce((o, c) => Object.assign(o, c)))
           console.log(hc)
           props.splice(props.indexOf('id'), 1)
-
           this.tableLabel = props
         }).catch((err) => {
           console.log(err)
@@ -76,12 +75,15 @@ export default {
       this.getdata(this.num)
     },
     upTableData (data) {
+      console.log(this.tableData)
+      console.log(data)
       this.tableData = data
       this.sum = parseInt(this.tableData.length)
+      console.log(this.tableData)
     }
   },
   created () {
-    getBanner({ name: 'user', num: 0 })
+    getUser({ num: 0 })
       .then((res) => {
         console.log(res)
         this.sum = parseInt(res.count[0].counts)

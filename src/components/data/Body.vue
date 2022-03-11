@@ -10,7 +10,7 @@
       </el-table-column>
       <el-table-column fixed="right"
                        label="操作"
-                       width="100">
+                       :width="this.$route.name === 'user'? 140 : 100">
         <template #default="scope">
           <el-button @click="handleClick(scope.row)"
                      type="text"
@@ -28,6 +28,15 @@
               <delete-filled />
             </el-icon>
           </el-button>
+          <el-button @click="powerClick(scope.row)"
+                     type="text"
+                     size="small"
+                     v-if="this.$route.name === 'user'">
+            <el-icon color="#E6A23C"
+                     size="25px">
+              <setting />
+            </el-icon>
+          </el-button>
         </template>
       </el-table-column>
     </el-table>
@@ -35,11 +44,11 @@
     <el-dialog title="修改数据"
                v-model="dialogFormVisibleRevise">
       <el-form :model="formRevise">
-        <el-form-item v-for="(val,key) in tableLabel"
+        <el-form-item v-for="(val,key) in (this.$route.name === 'user' ? tableLabe : tableLabel)"
                       :key="key"
                       :label="val"
                       label-width="120px">
-          <el-input v-model="formRevise.name[key]"
+          <el-input v-model="formRevise.name[(this.$route.name === 'user' && key === 1) ? 2 : key]"
                     autocomplete="off"></el-input>
         </el-form-item>
       </el-form>
@@ -47,7 +56,28 @@
         <span class="dialog-footer">
           <el-button @click="dialogFormVisibleRevise = false">取 消</el-button>
           <el-button type="primary"
-                     @click="Revisedata">确 定</el-button>
+                     @click="Revisedata">修 改</el-button>
+        </span>
+      </template>
+    </el-dialog>
+
+    <el-dialog title="权限"
+               v-model="powerRevise"
+               width="300px">
+      <el-select v-model="powerData"
+                 placeholder="请选择">
+        <el-option v-for="item in cities"
+                   :key="item"
+                   :label="item"
+                   :value="item">
+          <!-- <span style="float: left">{{ item }}</span> -->
+        </el-option>
+      </el-select>
+      <template #footer>
+        <span class="dialog-footer">
+          <el-button @click="powerRevise = false">取 消</el-button>
+          <el-button type="primary"
+                     @click="powerRevisedata">修 改</el-button>
         </span>
       </template>
     </el-dialog>
@@ -55,15 +85,20 @@
 </template>
 
 <script>
-import { getCommodityRevise, getCommodityDelete } from '../../api/index'
+import { getCommodityRevise, getCommodityDelete, getUserDelete, getUserUpdata, getUserUpdataPower } from '../../api/index'
+import { ElMessage } from 'element-plus'
 export default {
   data () {
     return {
       dialogFormVisibleRevise: false,
+      powerRevise: false,
       formRevise: {
         name: [],
         id: 1
-      }
+      },
+      tableLabe: ['用户名', '邮箱'],
+      powerData: '',
+      cities: ['超级管理员', '管理员', '体验员']
     }
   },
   props: {
@@ -83,25 +118,100 @@ export default {
       }
       this.dialogFormVisibleRevise = true
     },
+    powerClick (i) {
+      this.powerRevise = true
+      this.powerData = i.权限
+      this.id = i.id
+    },
     deleteClick (i) {
-      getCommodityDelete({ name: this.value, id: i.id })
-        .then((res) => {
-          console.log(res)
-          this.$emit('updata')
-        }).catch((err) => {
-          console.log(err)
-        })
+      // console.log(this.$route.name)
+      if (this.$route.name === 'otherData') {
+        getCommodityDelete({ name: this.value, id: i.id })
+          .then((res) => {
+            if (res.code === 401) {
+              ElMessage.error(res.message)
+            } else if (res.code === 200) {
+              this.$emit('updata')
+              ElMessage({
+                message: res.message,
+                type: 'success'
+              })
+            }
+          }).catch((err) => {
+            console.log(err)
+          })
+      } else if (this.$route.name === 'user') {
+        getUserDelete({ id: i.id })
+          .then((res) => {
+            if (res.code === 401) {
+              ElMessage.error(res.message)
+            } else if (res.code === 200) {
+              this.$emit('updata')
+              ElMessage({
+                message: res.message,
+                type: 'success'
+              })
+            }
+          }).catch((err) => {
+            console.log(err)
+          })
+      } else if (this.$route.name === 'homeData') {
+        ElMessage.error('权限不足')
+      }
     },
     Revisedata () {
-      getCommodityRevise({ name: this.value, str: this.tableLabel, data: this.formRevise.name, id: this.id })
+      if (this.$route.name === 'otherData') {
+        getCommodityRevise({ name: this.value, str: this.tableLabel, data: this.formRevise.name, id: this.id })
+          .then((res) => {
+            if (res.code === 401) {
+              ElMessage.error(res.message)
+            } else if (res.code === 200) {
+              this.$emit('updata')
+              ElMessage({
+                message: res.message,
+                type: 'success'
+              })
+            }
+          }).catch((err) => {
+            this.$emit('updata')
+            console.log(err)
+          })
+      } else if (this.$route.name === 'user') {
+        getUserUpdata({ name: this.formRevise.name[0], str: this.formRevise.name[2], id: this.id })
+          .then((res) => {
+            if (res.code === 401) {
+              ElMessage.error(res.message)
+            } else if (res.code === 200) {
+              this.$emit('updata')
+              ElMessage({
+                message: res.message,
+                type: 'success'
+              })
+            }
+          }).catch((err) => {
+            console.log(err)
+          })
+      } else if (this.$route.name === 'homeData') {
+        ElMessage.error('权限不足')
+      }
+      this.dialogFormVisibleRevise = false
+    },
+    powerRevisedata () {
+      getUserUpdataPower({ identity: this.powerData, id: this.id })
         .then((res) => {
-          this.$emit('updata')
+          if (res.code === 401) {
+            ElMessage.error(res.message)
+          } else if (res.code === 200) {
+            this.$emit('updata')
+            ElMessage({
+              message: res.message,
+              type: 'success'
+            })
+          }
         }).catch((err) => {
-          this.$emit('updata')
           console.log(err)
         })
-      this.dialogFormVisibleRevise = false
-      // Message.success('修改成功')
+      this.powerRevise = false
     }
   }
 }

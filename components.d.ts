@@ -5,6 +5,7 @@
 declare module 'vue' {
   export interface GlobalComponents {
     AddData: typeof import('./src/components/data/AddData.vue')['default']
+    AddUser: typeof import('./src/components/data/AddUser.vue')['default']
     Body: typeof import('./src/components/data/Body.vue')['default']
     ECharts: typeof import('./src/components/ECharts.vue')['default']
     ElAside: typeof import('element-plus/es')['ElAside']

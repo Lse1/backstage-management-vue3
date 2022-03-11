@@ -1,6 +1,9 @@
 export default {
   state: {
     isCollapse: false,
+    user: 'admin',
+    identity: '超级管理员',
+    lastTime: '2022-01-01',
     currentMenu: null,
     tabList: [
       {
@@ -17,7 +20,6 @@ export default {
     },
     selectMenu (state, val) {
       // val.name === 'home' ? (state.currentMenu = null) : state.currentMenu = val
-
       if (val.name === 'home') {
         state.currentMenu = null
       } else {
@@ -30,6 +32,15 @@ export default {
     closeTag (state, val) {
       const result = state.tabList.findIndex(item => item.name === val.name)
       state.tabList.splice(result, 1)
+    },
+    setuser (state, val) {
+      state.user = val
+    },
+    setidentity (state, val) {
+      state.identity = val
+    },
+    setlastTime (state, val) {
+      state.lastTime = val
     }
   }
 }

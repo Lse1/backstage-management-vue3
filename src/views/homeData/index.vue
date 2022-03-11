@@ -5,9 +5,9 @@
                    :cities="cities"
                    @DataChange="DataChange"
                    ref="selectClick"></TableSelect>
-      <Search :tableLabel="tableLabel"
+      <!-- <Search :tableLabel="tableLabel"
               :value="value"
-              @upTableData="upTableData"></Search>
+              @upTableData="upTableData"></Search> -->
       <AddDaata :tableLabel="tableLabel"
                 :value="value"
                 @updata="updata"
@@ -29,7 +29,7 @@
 <script>
 import { getBanner } from '../../api/index'
 import AddDaata from '../../components/data/AddData.vue'
-import Search from '../../components/data/Searchs.vue'
+// import Search from '../../components/data/Searchs.vue'
 import TableSelect from '../../components/data/TableSelect.vue'
 import Body from '../../components/data/Body.vue'
 
@@ -37,7 +37,7 @@ export default {
   name: 'Mall',
   components: {
     AddDaata,
-    Search,
+    // Search,
     TableSelect,
     Body
   },
