@@ -5,6 +5,7 @@
 declare module 'vue' {
   export interface GlobalComponents {
     AddData: typeof import('./src/components/data/AddData.vue')['default']
+    AddShop: typeof import('./src/components/shopdata/AddShop.vue')['default']
     AddUser: typeof import('./src/components/data/AddUser.vue')['default']
     Body: typeof import('./src/components/data/Body.vue')['default']
     ECharts: typeof import('./src/components/ECharts.vue')['default']
@@ -34,9 +35,12 @@ declare module 'vue' {
     ElSubMenu: typeof import('element-plus/es')['ElSubMenu']
     ElTable: typeof import('element-plus/es')['ElTable']
     ElTableColumn: typeof import('element-plus/es')['ElTableColumn']
+    ElUpload: typeof import('element-plus/es')['ElUpload']
     Headers: typeof import('./src/components/Headers.vue')['default']
     Menu: typeof import('./src/components/Menu.vue')['default']
     Searchs: typeof import('./src/components/data/Searchs.vue')['default']
+    SearchShop: typeof import('./src/components/shopdata/SearchShop.vue')['default']
+    ShopBody: typeof import('./src/components/shopdata/shopBody.vue')['default']
     TableSelect: typeof import('./src/components/data/TableSelect.vue')['default']
   }
 }

@@ -41,7 +41,6 @@ export default {
       tableLabel: [],
       sum: 100,
       num: 0,
-      cities: ['videodata', 'date', 'userdata', 'tabledata', 'orderdata'],
       value: '',
       thisname: ''
     }
@@ -60,7 +59,7 @@ export default {
           this.tableData = res.data
           const hc = JSON.parse(JSON.stringify(res.data))
           const props = Object.keys(hc.reduce((o, c) => Object.assign(o, c)))
-          console.log(hc)
+          // console.log(hc)
           props.splice(props.indexOf('id'), 1)
           this.tableLabel = props
         }).catch((err) => {
@@ -75,11 +74,11 @@ export default {
       this.getdata(this.num)
     },
     upTableData (data) {
-      console.log(this.tableData)
-      console.log(data)
+      // console.log(this.tableData)
+      // console.log(data)
       this.tableData = data
       this.sum = parseInt(this.tableData.length)
-      console.log(this.tableData)
+      // console.log(this.tableData)
     }
   },
   created () {
@@ -92,7 +91,6 @@ export default {
         const props = Object.keys(hc.reduce((o, c) => Object.assign(o, c)))
         props.splice(props.indexOf('id'), 1)
         this.tableLabel = props
-        this.value = 'videodata'
       }).catch((err) => {
         console.log(err)
       })

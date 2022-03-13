@@ -41,7 +41,7 @@ export default {
       menus: {
         Home: '首页',
         home: '首页',
-        category: '数据管理',
+        shopData: '商品数据',
         homeData: '首页数据',
         otherData: '其他数据',
         user: '用户管理'

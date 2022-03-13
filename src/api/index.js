@@ -41,6 +41,11 @@ export const getUserUpdata = (data) => Network.get('/user/updata', data)
 export const getUserUpdataPower = (data) => Network.get('/user/updataPower', data)
 export const getCommoditySearch = (data) => Network.get('/commodity/search', data)
 export const getUserSearch = (data) => Network.get('/user/search', data)
+export const getImages = (data) => Network.get('/shop/images', data)
+export const getShopSetImages = (data) => Network.post('/shop/set/images', data)
+export const getShopSearch = (data) => Network.get('/shop/search', data)
+export const getShopDeleteh = (data) => Network.get('/shop/delete', data)
+export const getShopUpdata = (data) => Network.post('/shop/updata', data)
 export const getPost = (data) => {
   // console.log('result')
   return new Promise(function (resolve, reject) {

@@ -3,7 +3,7 @@
     <div class="choice">
       <TableSelect :value="value"
                    :cities="cities"
-                   @DataChange="DataChange"></TableSelect>
+                   @DataChange="  DataChange"></TableSelect>
       <Search :tableLabel="tableLabel"
               :value="value"
               @upTableData="upTableData"></Search>

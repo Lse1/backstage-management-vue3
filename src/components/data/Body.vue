@@ -98,7 +98,7 @@ export default {
       },
       tableLabe: ['用户名', '邮箱'],
       powerData: '',
-      cities: ['超级管理员', '管理员', '体验员']
+      cities: ['超级管理员', '管理员', '测试员']
     }
   },
   props: {
