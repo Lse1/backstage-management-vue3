@@ -72,7 +72,7 @@
 
 <script>
 import { getLogin, getRegister } from '../api/index'
-// import { Message } from 'element-ui'
+import { ElMessage } from 'element-plus'
 export default {
   name: 'register',
   data () {
@@ -155,6 +155,10 @@ export default {
               localStorage.setItem('user', res.user)
               localStorage.setItem('lastTime', res.lastTime)
               this.$router.push({ name: 'home' })
+              ElMessage({
+                message: res.message,
+                type: 'success'
+              })
             }).catch((err) => {
               console.log(err)
             })
@@ -169,9 +173,18 @@ export default {
         if (valid) {
           getRegister({ ruleForm: this.registerRuleForm })
             .then((res) => {
-              console.log(res)
-              // localStorage.setItem('token', res.token)
-              // this.$router.push({ name: 'home' })
+              if (res.code === 401) {
+                console.log(res.message)
+                ElMessage.error(res.message)
+              } else if (res.code === 200) {
+                ElMessage({
+                  message: res.message,
+                  type: 'success'
+                })
+                for (const key in this.registerRuleForm) {
+                  this.registerRuleForm[key] = ''
+                }
+              }
             }).catch((err) => {
               console.log(err)
             })

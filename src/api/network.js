@@ -2,8 +2,8 @@ import axios from 'axios'
 import router from '../router'
 import { ElMessage } from 'element-plus'
 
-// axios.defaults.baseURL = 'http://localhost:3003/'
-axios.defaults.baseURL = 'http://106.55.188.48:3003/'
+axios.defaults.baseURL = 'http://localhost:3003/'
+// axios.defaults.baseURL = 'http://106.55.188.48:3003/'
 // axios.defaults.baseURL = 'http://106.55.188.48:3000/'
 axios.defaults.timeout = 5000
 // let count = 0
