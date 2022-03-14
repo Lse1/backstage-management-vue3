@@ -1,13 +1,15 @@
 # backstage-management-vue3
 
+后端： https://github.com/Lse1/backstage-management-vue3-serve
+
 ## Project setup
 ```
-yarn install
+yarn install 或 npm install
 ```
 
 ### Compiles and hot-reloads for development
 ```
-yarn serve
+yarn serve 或 npm install
 ```
 
 ### Compiles and minifies for production
